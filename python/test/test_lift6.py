@@ -4,33 +4,6 @@ from hamcrest import assert_that, equal_to
 from lift6 import Direction, floor, Elevator
 
 
-def test_current_floor_monitor_displays_current_level():
-    # Given
-    elevator = Elevator(floor(2))
-    
-    # When
-    currentLevelDisplayStep0 = elevator.currentFloor()
-    elevator.innerElevatorRequest(floor(3))
-    elevator.run()
-    currentLevelDisplayStep1 = elevator.currentFloor()
-    elevator.innerElevatorRequest(floor(4))
-    elevator.run()
-    currentLevelDisplayStep2 = elevator.currentFloor()
-    elevator.innerElevatorRequest(floor(0))
-    elevator.run()
-    currentLevelDisplayStep3 = elevator.currentFloor()
-    
-    # Then
-    assert_that(currentLevelDisplayStep0,
-                equal_to(floor(2)))
-    assert_that(currentLevelDisplayStep1,
-                equal_to(floor(3)))
-    assert_that(currentLevelDisplayStep2,
-                equal_to(floor(4)))
-    assert_that(currentLevelDisplayStep3,
-                equal_to(floor(0)))
-
-
 def test_elevator_will_move_up_and_down_then_standby_until_next_move_down_and_up():
         # Given
         elevator = Elevator(floor(0))

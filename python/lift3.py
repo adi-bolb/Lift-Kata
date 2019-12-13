@@ -3,13 +3,13 @@
 
 class Person:
 
-    def __init__(self, name, queue_position, destination):
+    def __init__(self, name, current_floor, destination):
         pass
 
 
 class SmallLift:
 
-    def __init__(self, max_floor):
+    def __init__(self, floor):
         pass
 
     def getTotalNumberOfVisits(self):

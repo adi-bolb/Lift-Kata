@@ -1,4 +1,3 @@
-from behave import when, then, given
 from nimoy.specification import Specification
 
 from lift5 import GreedyLiftCommandHandler, Building, Lift
