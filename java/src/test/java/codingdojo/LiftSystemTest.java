@@ -55,4 +55,17 @@ public class LiftSystemTest {
 
         verify(toVerify);
     }
+
+    @Test
+    public void fulfillTwoRequestsGoingDown() {
+        List<Integer> requests = new ArrayList<>();
+        requests.add(2);
+        requests.add(0);
+        Lift liftA = new Lift("A",3, requests, false);
+        LiftSystem lifts = new LiftSystem(Arrays.asList(0, 1, 2, 3), Collections.singletonList(liftA), Collections.emptyList());
+        String toVerify = liftSystemPrinter.print(lifts);
+        toVerify = tickAndVerify(lifts, toVerify);
+
+        verify(toVerify);
+    }
 }

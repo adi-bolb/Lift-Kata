@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lift {
     private String id;
@@ -53,10 +54,17 @@ public class Lift {
             this.requests.remove(this.floor);
         }
         else if (!requests.isEmpty()) {
-            for (int request:requests) {
-                this.floor = request;
-                break;
+            this.floor = getClosestFloor();
+        }
+    }
+
+    private int getClosestFloor() {
+        int closestFloor = Integer.MAX_VALUE;
+        for (int request:requests) {
+            if(Math.abs(this.floor - request) < Math.abs(this.floor - closestFloor)){
+                closestFloor = request;
             }
         }
+        return closestFloor;
     }
 }
