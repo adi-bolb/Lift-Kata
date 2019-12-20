@@ -55,6 +55,7 @@ public class Lift {
         else if (!requests.isEmpty()) {
             for (int request:requests) {
                 this.floor = request;
+                break;
             }
         }
     }
