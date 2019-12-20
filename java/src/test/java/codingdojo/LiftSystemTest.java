@@ -11,6 +11,14 @@ import static org.approvaltests.Approvals.verify;
 
 public class LiftSystemTest {
 
+    private final LiftSystemPrinter liftSystemPrinter = new LiftSystemPrinter();
+
+    private String tickAndVerify(LiftSystem lifts, String toVerify) {
+        lifts.tick();
+        toVerify += "\n\n";
+        toVerify += liftSystemPrinter.print(lifts);
+        return toVerify;
+    }
 
     @Test
     public void fulfillRequest() {
@@ -18,14 +26,9 @@ public class LiftSystemTest {
         requests.add(3);
         Lift liftA = new Lift("A",0, requests, false);
         LiftSystem lifts = new LiftSystem(Arrays.asList(0, 1, 2, 3), Collections.singletonList(liftA), Collections.emptyList());
-        LiftSystemPrinter liftSystemPrinter = new LiftSystemPrinter();
         String toVerify = liftSystemPrinter.print(lifts);
-        lifts.tick();
-        toVerify += "\n\n";
-        toVerify += liftSystemPrinter.print(lifts);
-        lifts.tick();
-        toVerify += "\n\n";
-        toVerify += liftSystemPrinter.print(lifts);
+        toVerify = tickAndVerify(lifts, toVerify);
+        toVerify = tickAndVerify(lifts, toVerify);
 
         verify(toVerify);
     }
@@ -34,11 +37,8 @@ public class LiftSystemTest {
     public void idleLift() {
         Lift liftA = new Lift("A",0);
         LiftSystem lifts = new LiftSystem(Arrays.asList(0, 1, 2, 3), Collections.singletonList(liftA), Collections.emptyList());
-        LiftSystemPrinter liftSystemPrinter = new LiftSystemPrinter();
         String toVerify = liftSystemPrinter.print(lifts);
-        lifts.tick();
-        toVerify += "\n\n";
-        toVerify += liftSystemPrinter.print(lifts);
+        toVerify = tickAndVerify(lifts, toVerify);
 
         verify(toVerify);
     }
