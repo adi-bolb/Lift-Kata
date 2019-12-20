@@ -2,19 +2,20 @@ package codingdojo;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 public class Lift {
     private String id;
     private int floor;
-    private List<Integer> requests;
+    private HashSet<Integer> requests;
     private boolean doorsOpen;
 
     public Lift(String id, int floor, List<Integer> requests, boolean doorsOpen) {
 
         this.id = id;
         this.floor = floor;
-        this.requests = requests;
+        this.requests = new HashSet<>(requests);
         this.doorsOpen = doorsOpen;
     }
 
@@ -47,12 +48,14 @@ public class Lift {
     }
 
     public void tick() {
-        if(this.floor == requests.get(0)) {
+        if(requests.contains(this.floor)) {
             this.doorsOpen = true;
-            this.requests = new ArrayList<>();
+            this.requests.remove(this.floor);
         }
         else if (!requests.isEmpty()) {
-            this.floor = requests.get(0);
+            for (int request:requests) {
+                this.floor = request;
+            }
         }
     }
 }
