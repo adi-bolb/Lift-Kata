@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lift {
-    private final String id;
-    private final int floor;
-    private final List<Integer> requests;
+    private String id;
+    private int floor;
+    private List<Integer> requests;
     private boolean doorsOpen;
 
     public Lift(String id, int floor, List<Integer> requests, boolean doorsOpen) {
@@ -44,5 +44,15 @@ public class Lift {
 
     public boolean areDoorsOpen() {
         return doorsOpen;
+    }
+
+    public void tick() {
+        if(this.floor == requests.get(0)) {
+            this.doorsOpen = true;
+            this.requests = new ArrayList<>();
+        }
+        else if (!requests.isEmpty()) {
+            this.floor = requests.get(0);
+        }
     }
 }

@@ -31,6 +31,8 @@ public class LiftSystem {
     }
 
     public void tick() {
-        // TODO: implement this method
+        for (Lift lift: lifts) {
+            lift.tick();
+        }
     }
 }
